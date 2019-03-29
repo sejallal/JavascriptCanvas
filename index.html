@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type = "text/css">
+      canvas{
+        border: 1px solid black;
+        width: 80%;
+        height: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      An alternative text describing what your canvas displays
+    </canvas>
+    <input type = "color" value= "#EE00CC" id = "cp">
+  <script>
+    document.querySelector("#cp")
+    console.log(c)
+  </script>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.canvas.width  = .8 * window.innerWidth;
+    ctx.canvas.height = .8 * window.innerHeight;
+    var x = 250
+    var y = 250
+    var radius = 10;
+    var color = "red"
+
+    function draw(){
+      ctx.beginPath();
+      ctx.fillStyle = color;
+      ctx.arc(x,y,radius,0,2*Math.PI);
+      ctx.fill();
+    }
+
+    function clearScreen(){
+      ctx.clearRect(0,0, canvas.width, canvas.height)
+    }
+
+    window.addEventListener('mousemove', function (e) {
+      // console.log(e.pageX);
+      // console.log(e.pageY);
+      x = e.clientX - canvas.offsetLeft;
+      y = e.clientY - canvas.offsetTop;
+      draw();
+    })
+
+    window.addEventListener('keydown',function(e){
+      if (event.keyCode == 82) {
+        color = 'red'
+      }
+      if (event.keyCode == 66) {
+        color = 'blue'
+      }
+      if (event.keyCode == 71) {
+        color = 'green'
+      }
+      if (event.keyCode == 89) {
+        color = 'yellow'
+      }
+      if (event.keyCode == 32) {
+        clearScreen();
+      }
+      if(event.keyCode == 38) {
+        radius = radius + 1
+      }
+      if (event.keyCode == 40) {
+        radius = radius - 1
+        if (radius < 1) {
+          radius = 1
+        }
+      }
+    })
+
+  </script>
+
+    <br><input type='file' id="myFile" size="50" onchange="myFunction()"><br>
+
+  </body>
+</html>
