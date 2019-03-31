@@ -13,20 +13,36 @@
     <canvas id="canvas" width="500" height="500">
       An alternative text describing what your canvas displays
     </canvas>
-    <input type = "color" value= "#EE00CC" id = "cp">
+    <input type = "color" id = "cp">
   <script>
-    document.querySelector("#cp")
-    console.log(c)
+    //document.querySelector("#cp")
+    //color = c;
+    //window.onload = function() {
+      //function onMousemove(c){
+      //  x = c.clientX - canvas.offsetLeft;
+      //  y = c.clientY - canvas.offsetTop;
+      //  color = document.getElementById("cp").value;
+      //  ctx.fillStyle = color;
+      //  draw()
+      //}
+      //canvas.addEventListener('mousemove', onMousemove);
+    //}
+
   </script>
   <script>
-    var canvas = document.querySelector('canvas');
+    var canvas = document.querySelector('#canvas');
     var ctx = canvas.getContext('2d');
-    ctx.canvas.width  = .8 * window.innerWidth;
-    ctx.canvas.height = .8 * window.innerHeight;
     var x = 250
     var y = 250
     var radius = 10;
     var color = "red"
+
+    window.addEventListener('resize', resizeCanvas, false);
+    function resizeCanvas() {
+      canvas.width  = .8 * window.innerWidth;
+      canvas.height = .8 * window.innerHeight;
+    }
+    resizeCanvas();
 
     function draw(){
       ctx.beginPath();
@@ -39,12 +55,14 @@
       ctx.clearRect(0,0, canvas.width, canvas.height)
     }
 
+    document.querySelector("#cp")
     window.addEventListener('mousemove', function (e) {
       // console.log(e.pageX);
       // console.log(e.pageY);
-      x = e.clientX - canvas.offsetLeft;
-      y = e.clientY - canvas.offsetTop;
+      x = e.clientX;
+      y = e.clientY;
       draw();
+      color = document.getElementById("cp").value;
     })
 
     window.addEventListener('touchmove', function (e) {
@@ -56,6 +74,10 @@
       y = touch.clientY - canvas.offsetTop;
       draw();
     })
+
+    window.addEventListener("orientationchange", function() {
+      alert("the orientation of the device is now " + screen.orientation.angle);
+    });
 
     window.addEventListener('keydown',function(e){
       if (event.keyCode == 82) {
